@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   annotations:
-    build.appstudio.openshift.io/repo: https://github.com/ashwgit-dev/fbc-pipeline?rev={{revision}}
+    build.appstudio.openshift.io/repo: https://github.com/csah1232/fbc-pipeline?rev={{revision}}
     build.appstudio.redhat.com/commit_sha: '{{revision}}'
     build.appstudio.redhat.com/pull_request_number: '{{pull_request_number}}'
     build.appstudio.redhat.com/target_branch: '{{target_branch}}'
@@ -407,13 +407,13 @@ spec:
       - validate-fbc
       taskRef:
         params:
-        - name: name
-          value: fbc-target-index-pruning-check
-        - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-fbc-target-index-pruning-check:0.1@sha256:a7696d92734be62700723b6d2c40dfaee4809e6a1d42b28deefc7c7463176c32
-        - name: kind
-          value: task
-        resolver: bundles
+        - name: url
+          value: https://github.com/csah1232/konflux-operator-tasks.git
+        - name: revision
+          value: CLOUDDST-32420-multi-ocp-pruning-check
+        - name: pathInRepo
+          value: task/fbc-target-index-pruning-check/0.1/fbc-target-index-pruning-check.yaml
+        resolver: git
       when:
       - input: $(params.skip-checks)
         operator: in
